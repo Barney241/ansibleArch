@@ -1,0 +1,29 @@
+---
+- name: Base
+  hosts: arch 
+  remote_user: barney
+  become: yes
+  roles:
+    - role: base
+- name: Yay
+  hosts: arch
+  remote_user: barney
+  vars_prompt:
+  - name: sudo_pass 
+    prompt: Enter password
+    private: true
+  roles:
+    - role: yay
+      pass: "{{ sudo_pass }}"
+- name: Qemu agent
+  hosts: virtual
+  remote_user: barney
+  become: yes
+  roles:
+    - role: qemuAgent
+- name: Grub
+  hosts: arch
+  remote_user: barney
+  become: yes
+  roles:
+    - role: grub

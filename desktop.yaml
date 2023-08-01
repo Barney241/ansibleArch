@@ -1,0 +1,66 @@
+---
+- name: Install audio
+  hosts: arch
+  remote_user: barney
+  roles:
+    - role: audio
+- name: Install laptop
+  hosts: laptop
+  remote_user: barney
+  roles:
+    - role: laptop
+- name: Install nvidia
+  hosts: nvidia
+  remote_user: barney
+  roles:
+    - role: nvidia
+- name: Install intel
+  hosts: intel
+  remote_user: barney
+  roles:
+    - role: intel
+- name: Install sway
+  hosts: sway
+  remote_user: barney
+  roles:
+    - role: sway
+    - role: desktopApps
+- name: Install hyprland
+  hosts: hyprland:&nvidia
+  remote_user: barney
+  roles:
+    - role: hypr
+      nvidia: true
+    - role: desktopApps
+- name: Install laptop
+  hosts: hyprland:&laptop
+  remote_user: barney
+  roles:
+    - role: laptopDesktop
+- name: Install laptop
+  hosts: sway:&laptop
+  remote_user: barney
+  roles:
+    - role: laptopDesktop
+- name: Install hyprland
+  hosts: hyprland:!nvidia
+  remote_user: barney
+  roles:
+    - role: hypr
+      nvidia: false
+    - role: desktopApps
+- name: Install wayland
+  hosts: hyprland:sway
+  remote_user: barney
+  roles:
+    - role: wayland
+- name: Install qemu
+  hosts: qemu
+  remote_user: barney
+  roles:
+    - role: qemu
+- name: Install x1 mini laptop
+  hosts: x1Mini
+  remote_user: barney
+  roles:
+    - role: x1Mini

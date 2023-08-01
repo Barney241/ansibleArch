@@ -1,0 +1,13 @@
+---
+- name: Base dev tools
+  hosts: arch
+  remote_user: barney
+  vars_prompt:
+  - name: sudo_pass 
+    prompt: Enter password
+    private: true
+  roles:
+    - role: dev
+    - role: nvim
+    - role: terminal
+      pass: "{{ sudo_pass }}"
